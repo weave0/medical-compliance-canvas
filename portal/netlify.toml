@@ -1,10 +1,9 @@
 [build]
-  # Skip build command - using pre-built dist folder
-  # command = ""
+  command = "npm install && npm run build"
   publish = "dist"
 
 [dev]
-  # command = ""
+  command = "npm run dev"
 
 [[headers]]
   for = "/assets/*"
