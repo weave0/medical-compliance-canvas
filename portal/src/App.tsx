@@ -109,14 +109,14 @@ export default function App() {
     setBookmarks(prev => prev.includes(id) ? prev.filter(b => b !== id) : [...prev, id])
   }
   
-  // Role-based color themes
-  const roleThemes: Record<string, { accent: string; glow: string; badge: string }> = {
-    executive: { accent: 'from-purple-500/30 to-pink-500/30', glow: 'shadow-purple-500/50', badge: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
-    compliance: { accent: 'from-blue-500/30 to-cyan-500/30', glow: 'shadow-blue-500/50', badge: 'bg-blue-500/20 text-blue-300 border-blue-500/30' },
-    equity: { accent: 'from-emerald-500/30 to-teal-500/30', glow: 'shadow-emerald-500/50', badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
-    quality: { accent: 'from-amber-500/30 to-orange-500/30', glow: 'shadow-amber-500/50', badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
-    clinical: { accent: 'from-red-500/30 to-rose-500/30', glow: 'shadow-red-500/50', badge: 'bg-red-500/20 text-red-300 border-red-500/30' },
-    digital: { accent: 'from-indigo-500/30 to-violet-500/30', glow: 'shadow-indigo-500/50', badge: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' }
+  // Role-based color themes with enhanced contrast
+  const roleThemes: Record<string, { accent: string; glow: string; badge: string; activeBorder: string }> = {
+    executive: { accent: 'from-purple-500/40 to-pink-500/40', glow: 'shadow-purple-400/60', badge: 'bg-purple-500/25 text-purple-200 border-purple-400/40', activeBorder: 'border-purple-400' },
+    compliance: { accent: 'from-blue-500/40 to-cyan-500/40', glow: 'shadow-blue-400/60', badge: 'bg-blue-500/25 text-blue-200 border-blue-400/40', activeBorder: 'border-blue-400' },
+    equity: { accent: 'from-emerald-500/40 to-teal-500/40', glow: 'shadow-emerald-400/60', badge: 'bg-emerald-500/25 text-emerald-200 border-emerald-400/40', activeBorder: 'border-emerald-400' },
+    quality: { accent: 'from-amber-500/40 to-orange-500/40', glow: 'shadow-amber-400/60', badge: 'bg-amber-500/25 text-amber-200 border-amber-400/40', activeBorder: 'border-amber-400' },
+    clinical: { accent: 'from-red-500/40 to-rose-500/40', glow: 'shadow-red-400/60', badge: 'bg-red-500/25 text-red-200 border-red-400/40', activeBorder: 'border-red-400' },
+    digital: { accent: 'from-indigo-500/40 to-violet-500/40', glow: 'shadow-indigo-400/60', badge: 'bg-indigo-500/25 text-indigo-200 border-indigo-400/40', activeBorder: 'border-indigo-400' }
   }
   const theme = roleThemes[currentRole] || roleThemes.executive
   
@@ -128,21 +128,21 @@ export default function App() {
       <ThreeBG />
       
       {/* Top Nav Bar */}
-      <nav className={`relative z-20 px-4 md:px-6 py-3 border-b border-white/10 backdrop-blur bg-gradient-to-r ${theme.accent} flex flex-wrap items-center justify-between gap-4`}>
+      <nav className={`relative z-20 px-4 md:px-6 py-4 border-b border-white/15 backdrop-blur-xl bg-gradient-to-r ${theme.accent} shadow-lg flex flex-wrap items-center justify-between gap-4`}>
         <div className="flex items-center gap-4 md:gap-6">
-          <Link to="/" className="flex items-center gap-2 text-white/90 hover:text-white transition group">
-            <HomeIcon className="w-5 h-5 group-hover:scale-110 transition" />
+          <Link to="/" className="flex items-center gap-2 text-white/95 hover:text-white transition-all duration-200 group">
+            <HomeIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
             <span className="font-semibold hidden sm:inline">Executive Hub</span>
           </Link>
-          <h1 className="text-lg md:text-xl font-bold text-white">Medical Compliance</h1>
+          <h1 className="text-lg md:text-xl font-bold text-white drop-shadow-lg">Medical Compliance</h1>
         </div>
         
-        <div className="flex items-center gap-2 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
           {/* Role Switcher */}
           <select
             value={currentRole}
             onChange={(e) => setCurrentRole(e.target.value)}
-            className="px-2 md:px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-xs md:text-sm text-white backdrop-blur focus:outline-none focus:ring-2 focus:ring-white/50 cursor-pointer"
+            className="px-3 md:px-4 py-2 rounded-xl bg-white/15 border border-white/25 text-xs md:text-sm text-white backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-white/40 cursor-pointer hover:bg-white/20 transition-all duration-200 font-medium"
           >
             <option value="executive">Executive</option>
             <option value="compliance">Compliance</option>
@@ -155,7 +155,7 @@ export default function App() {
           {/* Bookmarks Toggle */}
           <button
             onClick={() => { setShowBookmarks(!showBookmarks); setShowRecent(false) }}
-            className={`flex items-center gap-1 md:gap-2 px-2 md:px-3 py-1.5 rounded-lg border border-white/20 text-xs md:text-sm text-white backdrop-blur transition ${showBookmarks ? 'bg-white/30' : 'bg-white/10 hover:bg-white/20'}`}
+            className={`flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-xl border border-white/25 text-xs md:text-sm text-white backdrop-blur-md transition-all duration-200 font-medium ${showBookmarks ? 'bg-white/30 shadow-glow-sm' : 'bg-white/15 hover:bg-white/25'}`}
           >
             <BookmarkIcon className="w-4 h-4" />
             <span className="hidden sm:inline">({bookmarks.length})</span>
@@ -164,7 +164,7 @@ export default function App() {
           {/* Recent Toggle */}
           <button
             onClick={() => { setShowRecent(!showRecent); setShowBookmarks(false) }}
-            className={`flex items-center gap-1 md:gap-2 px-2 md:px-3 py-1.5 rounded-lg border border-white/20 text-xs md:text-sm text-white backdrop-blur transition ${showRecent ? 'bg-white/30' : 'bg-white/10 hover:bg-white/20'}`}
+            className={`flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-xl border border-white/25 text-xs md:text-sm text-white backdrop-blur-md transition-all duration-200 font-medium ${showRecent ? 'bg-white/30 shadow-glow-sm' : 'bg-white/15 hover:bg-white/25'}`}
           >
             <ClockIcon className="w-4 h-4" />
             <span className="hidden sm:inline">({recentDocs.length})</span>
@@ -172,11 +172,13 @@ export default function App() {
         </div>
       </nav>
       
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-4 p-4">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 p-4 md:p-5">
         <header className="lg:col-span-12 flex items-center justify-end">
-          <div className="text-xs md:text-sm text-slate-400">{docs.length} docs • {filtered.length} shown</div>
+          <div className="text-xs md:text-sm text-slate-400 font-medium">
+            <span className="text-primary-light">{docs.length}</span> docs • <span className="text-primary-light">{filtered.length}</span> shown
+          </div>
         </header>
-        <aside className="lg:col-span-3 glass p-4 glow">
+        <aside className="lg:col-span-3 glass-strong p-5 md:p-6 rounded-2xl shadow-glow">
           <Sidebar
             query={query}
             setQuery={setQuery}
@@ -184,15 +186,30 @@ export default function App() {
             setFilter={setFilter}
             docs={docs}
           />
-          <div className="mt-4">
-            <div className="text-xs uppercase text-slate-400 mb-2">Tag Filters</div>
+          <div className="mt-6">
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Active Tag Filters</div>
             <div className="flex flex-wrap gap-2">
               {Array.from(new Set(docs.flatMap(d => d.tags))).sort().map(t => (
-                <button key={t} onClick={() => toggleTag(t)} className={`px-2 py-1 rounded-full border text-xs ${tagFilter.includes(t)?'border-primary text-primary':'border-white/10 text-slate-300'}`}>{t}</button>
+                <button 
+                  key={t} 
+                  onClick={() => toggleTag(t)} 
+                  className={`px-3 py-1.5 rounded-lg border text-xs font-medium transition-all duration-200 ${
+                    tagFilter.includes(t)
+                      ? 'border-primary bg-primary/20 text-primary shadow-glow-sm' 
+                      : 'border-white/10 bg-slate-900/40 text-slate-300 hover:border-white/20 hover:bg-slate-900/60'
+                  }`}
+                >
+                  {t}
+                </button>
               ))}
             </div>
-            {tagFilter.length>0 && (
-              <button className="mt-3 text-xs text-slate-400 hover:text-primary" onClick={clearTags}>Clear tags</button>
+            {tagFilter.length > 0 && (
+              <button 
+                className="mt-4 text-xs text-slate-400 hover:text-primary-light transition-colors duration-200 font-medium" 
+                onClick={clearTags}
+              >
+                ✕ Clear all tags
+              </button>
             )}
           </div>
         </aside>
