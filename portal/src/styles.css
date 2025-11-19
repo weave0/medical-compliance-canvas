@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body, #root { height: 100%; }
+body { @apply bg-slate-950 text-slate-100; }
+
+.glass { @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl; }
+.glow { box-shadow: 0 0 40px rgba(118,228,247,0.25), 0 0 80px rgba(183,148,244,0.15); }
+
+a { @apply text-primary hover:text-accent transition-colors; }

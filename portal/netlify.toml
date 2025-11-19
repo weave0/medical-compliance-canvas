@@ -1,0 +1,12 @@
+[build]
+  # Skip build command - using pre-built dist folder
+  # command = ""
+  publish = "dist"
+
+[dev]
+  # command = ""
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
